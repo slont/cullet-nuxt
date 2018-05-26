@@ -12,9 +12,9 @@ export const baseMutations = {
 }
 
 export const baseActions = {
-  async find({state}, params = {}) {
+  async find({state}, params = {query: {}}) {
     return this.$axios({
-      url: `${state.endpoint}?${qs.stringify(params, {indices: false})}`,
+      url: `${state.endpoint}?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET',
       mode: 'cors',
       credentials: 'include',

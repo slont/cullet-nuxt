@@ -114,8 +114,7 @@
       // console.log(store)
       // return new ItemModel().findByNew({
       return store.dispatch('modules/item/findByNew', {
-        p: 1,
-        s: SIZE
+        query: {p: 1, s: SIZE}
       }).then(res => {
         return {
           newItems: res.data,
@@ -151,9 +150,9 @@
     methods: {
       refresh() {
         if (this.loggedIn) {
-          new UserModel().findItems(this.user.id, {
-            p: 1,
-            s: 10
+          this.$store.dispatch('modules/user/findItems', {
+            userId: this.user.id,
+            query: {p: 1, s: 10}
           }).then(res => {
             this.updatedItems = res.data.slice(0, 5)
             this.$store.commit('SET_ITEMS', res.data)
@@ -165,8 +164,7 @@
       fetchNewItems() {
         // new ItemModel().findByNew({
         this.$store.dispatch('modules/item/findByNew', {
-          p: Math.floor(this.newItems.length / SIZE) + 1,
-          s: SIZE
+          query: {p: Math.floor(this.newItems.length / SIZE) + 1, s: SIZE}
         }).then(res => {
           if (0 === Math.floor(this.newItems.length / SIZE)) {
             this.newItems = res.data

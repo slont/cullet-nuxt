@@ -81,10 +81,6 @@ module.exports = {
     debug: true,
     retry: {
       retries: 3
-    },
-    requestInterceptor: (config, {store}) => {
-      config.headers.common['Authorization'] = ''
-      return config
     }
   },
   manifest: {

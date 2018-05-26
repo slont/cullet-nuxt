@@ -1,4 +1,4 @@
-export default function ({app, env, process}) {
+export default function ({app}) {
   // if (process.server) {
   //   // SPAモードなのでこの条件に来ることはないけどお作法として。
   //   return;
@@ -8,6 +8,10 @@ export default function ({app, env, process}) {
     if (app.store.state.accessToken) {
       config.headers.Authorization = app.store.state.accessToken
     }
+    if (process.client) {
+      config.headers['X-Requested-With'] = location.href
+    }
+    config.headers['Content-Type'] = 'application/json'
     return config
   })
 

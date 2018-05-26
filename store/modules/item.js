@@ -1,5 +1,4 @@
 import qs from 'qs'
-import Base from '../../models/Base'
 import {baseState, baseActions, baseMutations} from './base'
 
 export const state = () => ({
@@ -13,13 +12,12 @@ export const mutations = {
 export const actions = {
   ...baseMutations,
 
-  findByNew({state}, params = {}) {
+  findByNew({state}, params = {query: {}}) {
     return this.$axios({
-      url: `${process.env.API_ENDPOINT}/items/_new?${qs.stringify(params, {indices: false})}`,
+      url: `${process.env.API_ENDPOINT}/items/_new?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET',
       mode: 'cors',
-      credentials: 'include',
-      headers: Base.getHeaders()
+      credentials: 'include'
     })
   }
 }
