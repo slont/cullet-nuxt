@@ -96,7 +96,6 @@
 </template>
 
 <script>
-  import UserModel from '@/models/User'
   import ElementView from '@/components/element/ElementView'
   const SIZE = 12
 

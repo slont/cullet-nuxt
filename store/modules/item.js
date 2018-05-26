@@ -2,15 +2,17 @@ import qs from 'qs'
 import {baseState, baseActions, baseMutations} from './base'
 
 export const state = () => ({
-  ...baseState
+  endpoint: '/items'
 })
 
 export const mutations = {
-  ...baseActions
+  init(state, params = {themeId: ''}) {
+    baseMutations.init(state, `/themes/${params.themeId}/items`)
+  }
 }
 
 export const actions = {
-  ...baseMutations,
+  ...baseActions,
 
   findByNew({state}, params = {query: {}}) {
     return this.$axios({

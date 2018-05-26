@@ -3,15 +3,17 @@ import Base from '../../models/Base'
 import {baseState, baseActions, baseMutations} from './base'
 
 export const state = () => ({
-  ...baseState
+  endpoint: '/users'
 })
 
 export const mutations = {
-  ...baseActions
+  init(state) {
+    baseMutations.init(state, `/users`)
+  }
 }
 
 export const actions = {
-  ...baseMutations,
+  ...baseActions,
 
   updatePassword({state}, params = {id: '', data: {}}) {
     return this.$axios({

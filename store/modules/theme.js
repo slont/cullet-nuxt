@@ -2,7 +2,7 @@ import qs from 'qs'
 import {baseState, baseActions, baseMutations} from './base'
 
 export const state = () => ({
-  ...baseState
+  endpoint: '/themes'
 })
 
 export const mutations = {
