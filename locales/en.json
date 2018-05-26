@@ -1,0 +1,35 @@
+{
+  "title": "Cullet",
+  "views": {
+    "index": {},
+    "confirm": {
+      "pleaseInputYourName": "Can you input your name",
+      "userName": "User Name"
+    },
+    "signup": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "signin": {
+      "email": "Email",
+      "password": "Password",
+      "redirectMessage": "",
+      "passwordReset": ""
+    }
+  },
+  "components": {},
+  "buttons": {
+    "signup": "Sign Up",
+    "signin": "Sign In"
+  },
+  "formats": {},
+  "attributes": {
+    "password": "Password",
+    "email": "Email",
+    "culletName": "Cullet Name"
+  },
+  "locales": {
+    "ja": "Japanese",
+    "en": "English"
+  }
+}

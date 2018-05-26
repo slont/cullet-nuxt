@@ -1,3 +1,5 @@
+const nodeExternals = require('webpack-node-externals')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -10,9 +12,33 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', integrity: 'sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp', crossorigin: 'anonymous' }
     ]
   },
+  css: [
+    // { src: 'bulma/bulma.sass', lang: 'sass' },
+    // { src: 'bulma-checkradio/dist/bulma-checkradio.sass', lang: 'sass' },
+    // { src: 'bulma-switch/dist/bulma-switch.sass', lang: 'sass' },
+    { src: '~/assets/styles/global.scss', lang: 'scss' },
+    'element-ui/lib/theme-chalk/index.css'
+  ],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/moment',
+    '@nuxtjs/pwa',
+    ['nuxt-sass-resources-loader', '@/assets/styles/common.scss']
+  ],
+  plugins: [
+    '@/plugins/main',
+    '@/plugins/vue-i18n',
+    '@/plugins/axios',
+    {src: '@/plugins/vee-validate', ssr: true},
+    {src: '@/plugins/social', ssr: true},
+    {src: '@/plugins/persistedstate', ssr: true},
+    '@/plugins/element-ui'
+  ],
+  inject: ['$validator'],
   /*
   ** Customize the progress bar color
   */
@@ -24,7 +50,22 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    postcss: { plugins: { 'postcss-custom-properties': false } },
+    vendor: [
+      'blueimp-canvas-to-blob',
+      'vue-i18n',
+      'vee-validate',
+      'axios',
+      'element-ui'
+    ],
+    extend (config, { isServer, isDev, isClient }) {
+      if (isServer) {
+        config.externals = [
+          nodeExternals({
+            whitelist: [/^vue-tweet-embed/]
+          })
+        ]
+      }
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -34,5 +75,23 @@ module.exports = {
         })
       }
     }
+  },
+  axios: {
+    credentials: true,
+    debug: true,
+    retry: {
+      retries: 3
+    },
+    requestInterceptor: (config, {store}) => {
+      config.headers.common['Authorization'] = ''
+      return config
+    }
+  },
+  manifest: {
+    name: "Cullet",
+    lang: 'ja'
+  },
+  env: {
+    API_ENDPOINT: process.env.API_ENDPOINT || 'https://api.cullet.me/v1'
   }
 }

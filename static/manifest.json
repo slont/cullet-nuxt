@@ -1,0 +1,26 @@
+{
+  "name": "Cullet",
+  "short_name": "Cullet",
+  "icons": [
+    {
+      "src": "/static/img/icons/cullet-rabit_orange_96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/img/icons/cullet-rabit_orange_144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/img/icons/cullet-rabit_orange_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff7600",
+  "gcm_sender_id": "103953800507"
+}

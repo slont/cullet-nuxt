@@ -1,0 +1,45 @@
+.fade-enter-active,
+.fade-leave-active {
+  transition: all .3s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.list-complete-item {
+  transition: all 1s;
+  display: inline-block;
+}
+.list-complete-enter,
+.list-complete-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-complete-leave-active {
+  position: absolute;
+}
+
+@media screen and (max-width: 768px) {
+  // スライドするとレイアウトが崩れるため
+  .slide-fade-enter-active,
+  .slide-fade-leave-active {
+    transition: all .2s ease;
+  }
+  .slide-fade-enter,
+  .slide-fade-leave-to {
+    opacity: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .slide-fade-enter-active,
+  .slide-fade-leave-active {
+    transition: all .2s ease;
+  }
+  .slide-fade-enter,
+  .slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+}

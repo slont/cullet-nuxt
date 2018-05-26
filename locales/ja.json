@@ -1,0 +1,35 @@
+{
+  "title": "Cullet",
+  "views": {
+    "index": {},
+    "confirm": {
+      "pleaseInputYourName": "ユーザネームを入力してください",
+      "userName": "ユーザネーム"
+    },
+    "signup": {
+      "email": "メールアドレス",
+      "password": "パスワード"
+    },
+    "signin": {
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "redirectMessage": "ログインしてください。",
+      "passwordReset": "パスワードを忘れた場合"
+    }
+  },
+  "components": {},
+  "buttons": {
+    "signup": "新規登録",
+    "signin": "ログイン"
+  },
+  "formats": {},
+  "attributes": {
+    "password": "パスワード",
+    "email": "メールアドレス",
+    "culletName": "カレット名"
+  },
+  "locales": {
+    "ja": "日本語",
+    "en": "英語"
+  }
+}

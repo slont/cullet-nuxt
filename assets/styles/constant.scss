@@ -1,0 +1,41 @@
+$text-color-base: #001423;
+$text-color: rgba($text-color-base, .75);
+$text-color-strong: rgba($text-color-base, .9);
+$text-color-weak: rgba($text-color-base, .5);
+$main-color: #ff7600;
+$sub-color: #069dff;
+$bg-color: #ffffff;
+$bg-color-main: rgba($main-color, .15);
+$border: rgba($text-color-weak, .1);
+$label-color: rgba($text-color, .8);
+$border-style: 1px solid $border;
+$width: 920px;
+$item-page-width: 620px;
+
+$size-1: 2.5rem;
+$size-2: 2rem;
+$size-3: 1.5rem;
+$size-4: 1.25rem;
+$size-5: 1rem;
+$size-6: .875rem;
+$size-7: .75rem;
+$size-8: .65rem;
+
+$header-nav-height: 3.25rem;
+$footer-nav-height: 3.25rem;
+
+$element-button-size: 4rem;
+
+// for bulma
+$primary: $main-color;
+$primary-invert: findColorInvert($main-color);
+$info: $sub-color;
+$info-invert: findColorInvert($sub-color);
+$file-name-border-color: $text-color;
+$tabs-link-active-border-bottom-color: $primary;
+$tabs-link-active-color: $primary;
+$card-color: $text-color;
+$tabs-toggle-link-active-background-color: $primary;
+$tabs-toggle-link-active-border-color: $primary;
+$tabs-toggle-link-active-color: $primary-invert;
+$box-shadow: 0 2px 3px rgba(black, 0.1), 0 0 0 1px rgba(black, 0.1) !default;

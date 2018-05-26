@@ -13,13 +13,32 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "nuxt": "^1.0.0"
+    "@nuxtjs/axios": "^5.3.1",
+    "@nuxtjs/moment": "^1.0.0",
+    "@nuxtjs/pwa": "^2.0.8",
+    "blueimp-canvas-to-blob": "^3.14.0",
+    "blueimp-load-image": "^2.19.0",
+    "bulma": "^0.7.1",
+    "bulma-checkradio": "^1.0.2",
+    "bulma-switch": "^1.0.2",
+    "element-ui": "^2.3.9",
+    "moment": "^2.22.1",
+    "nuxt": "^1.0.0",
+    "vee-validate": "^2.0.9",
+    "vue-i18n": "^7.6.0",
+    "vue-social-sharing": "^2.3.3",
+    "vue-tweet-embed": "^2.1.1",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.0.0",
+    "node-sass": "^4.9.0",
+    "nuxt-sass-resources-loader": "^2.0.0",
+    "sass-loader": "^7.0.1",
+    "webpack-node-externals": "^1.7.2"
   }
 }
