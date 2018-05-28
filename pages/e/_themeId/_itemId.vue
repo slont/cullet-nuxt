@@ -92,7 +92,6 @@
 </template>
 
 <script>
-  import ThemeModel from '@/models/Theme'
   import TemplateModel from '@/models/Template'
   import Modal from '@/components/Modal'
   import ThemeSelectModal from '@/components/theme/ThemeSelectModal'
@@ -168,7 +167,7 @@
     },
     created() {
       if (this.themeId === this.$store.state.theme.id) {
-        Object.assign(this.theme, new ThemeModel._deserialize(this.$store.state.theme))
+        Object.assign(this.theme, this.$store.state.theme)
       }
       this.refresh().then(() => this.$el.open())
     },
@@ -204,7 +203,7 @@
     },
     methods: {
       async refresh() {
-        new ThemeModel().findOne(this.themeId).then(res => {
+        this.$store.dispatch('modules/theme/findOne', {id: this.themeId}).then(res => {
           this.theme = res.data
         })
 

@@ -93,7 +93,6 @@
 </template>
 
 <script>
-  import ThemeModel from '@/models/Theme'
   import TemplateModel from '@/models/Template'
   import Modal from '@/components/Modal'
   import ThemeSelectModal from '@/components/theme/ThemeSelectModal'
@@ -160,7 +159,7 @@
     },
     created() {
       if (this.$store.state.theme.id) {
-        Object.assign(this.theme, ThemeModel._deserialize(this.$store.state.theme))
+        Object.assign(this.theme, this.$store.state.theme)
         if (this.$store.state.theme.templates[0] && this.$store.state.theme.templates[0].elements.length) {
           this.item.elements = this.$store.state.theme.templates[0].elements
         }
@@ -199,7 +198,7 @@
         if (theme.id) {
           this.theme = theme
         } else {
-          new ThemeModel().findOne(this.themeId).then(res => {
+          this.$store.dispatch('modules/theme/findOne', {id: this.themeId}).then(res => {
             this.theme = res.data
           })
         }
