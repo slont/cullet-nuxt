@@ -1,8 +1,8 @@
 import qs from 'qs'
-import {baseActions, baseMutations} from './base'
+import {baseActions} from './base'
 
 export const state = () => ({
-  endpoint: `${process.env.API_ENDPOINT}/users`
+  endpoint: '/users'
 })
 
 export const actions = {

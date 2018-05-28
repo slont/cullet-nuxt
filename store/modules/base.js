@@ -1,15 +1,4 @@
 import qs from 'qs'
-import Base from "../../models/Base";
-
-export const baseState = {
-  endpoint: ''
-}
-
-export const baseMutations = {
-  init(state, path) {
-    state.endpoint = `${process.env.API_ENDPOINT}${path}`
-  }
-}
 
 export const baseActions = {
   async find({state}, params = {query: {}}) {

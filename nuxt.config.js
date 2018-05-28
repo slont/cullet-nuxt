@@ -77,6 +77,7 @@ module.exports = {
     }
   },
   axios: {
+    baseURL: process.env.API_ENDPOINT,
     credentials: true,
     debug: true,
     retry: {

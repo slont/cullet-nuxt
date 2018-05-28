@@ -1,13 +1,13 @@
 import qs from 'qs'
-import {baseActions, baseMutations} from './base'
+import {baseActions} from './base'
 
 export const state = () => ({
-  endpoint: `${process.env.API_ENDPOINT}/items`
+  endpoint: '/items'
 })
 
 export const mutations = {
   init(state, params = {themeId: ''}) {
-    baseMutations.init(state, `/themes/${params.themeId}/items`)
+    state.endpoint = `/themes/${params.themeId}/items`
   }
 }
 
@@ -16,7 +16,7 @@ export const actions = {
 
   findByNew({state}, params = {query: {}}) {
     return this.$axios({
-      url: `${process.env.API_ENDPOINT}/items/_new?${qs.stringify(params.query, {indices: false})}`,
+      url: `/items/_new?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET'
     })
   }
