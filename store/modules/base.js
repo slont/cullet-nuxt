@@ -16,9 +16,6 @@ export const baseActions = {
     return this.$axios({
       url: `${state.endpoint}?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-      headers: Base.getHeaders()
     })
   },
 
@@ -26,9 +23,6 @@ export const baseActions = {
     return this.$axios({
       url: `${state.endpoint}/${params.id}?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-      headers: Base.getHeaders()
     })
   },
 
@@ -36,9 +30,6 @@ export const baseActions = {
     return this.$axios({
       url: `${state.endpoint}`,
       method: 'POST',
-      mode: 'cors',
-      credentials: 'include',
-      headers: Base.getHeaders(),
       data
     })
   },
@@ -47,9 +38,6 @@ export const baseActions = {
     return this.$axios({
       url: `${state.endpoint}/${params.id}`,
       method: 'PUT',
-      mode: 'cors',
-      credentials: 'include',
-      headers: Base.getHeaders(),
       data
     })
   },
@@ -57,10 +45,7 @@ export const baseActions = {
   async delete({state}, params = {id: '', data: {}}) {
     return this.$axios({
       url: `${state.endpoint}/${params.id}`,
-      method: 'DELETE',
-      mode: 'cors',
-      credentials: 'include',
-      headers: Base.getHeaders()
+      method: 'DELETE'
     })
   }
 }

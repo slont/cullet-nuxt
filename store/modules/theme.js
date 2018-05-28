@@ -11,45 +11,35 @@ export const actions = {
   findByTagName({state}, params = {query: {}}) {
     return this.$axios({
       url: `${state.endpoint}/_tag?${qs.stringify(params.query, {indices: false})}`,
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include'
+      method: 'GET'
     })
   },
 
   findByNew({state}, params = {query: {}}) {
     return this.$axios({
       url: `${state.endpoint}/_new?${qs.stringify(params.query, {indices: false})}`,
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include'
+      method: 'GET'
     })
   },
 
   findOneFavorite({state}, params = {themeId: '', userId: ''}) {
     return this.$axios({
       url:`${state.endpoint}/${params.themeId}/favorites/${params.userId}`,
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include'
+      method: 'GET'
     })
   },
 
   updateFavorite({state}, params = {themeId: '', userId: ''}) {
     return this.$axios({
       url: `${state.endpoint}/${params.themeId}/favorites/${params.userId}`,
-      method: 'PUT',
-      mode: 'cors',
-      credentials: 'include'
+      method: 'PUT'
     })
   },
 
   deleteFavorite({state}, params = {themeId: '', userId: ''}) {
     return state.$axios({
       url: `${state.endpoint}/${params.themeId}/favorites/${params.userId}`,
-      method: 'DELETE',
-      mode: 'cors',
-      credentials: 'include'
+      method: 'DELETE'
     })
   }
 }
