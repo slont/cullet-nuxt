@@ -37,7 +37,7 @@
 
       <div class="template-tabs tabs is-small">
         <ul>
-          <li v-for="(template, i) in templates"
+          <li v-for="(template, i) in templates" :key="template.id"
               :class="{ 'is-active': selectedTemplateNo === i }" @click="changeTemplate(i)">
             <a><span>{{ `テンプレート` }}</span></a>
           </li>
