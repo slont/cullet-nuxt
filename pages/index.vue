@@ -150,7 +150,7 @@
       refresh() {
         if (this.loggedIn) {
           this.$store.dispatch('modules/user/findItems', {
-            userId: this.user.id,
+            id: this.user.id,
             query: {p: 1, s: 10}
           }).then(res => {
             this.updatedItems = res.data.slice(0, 5)

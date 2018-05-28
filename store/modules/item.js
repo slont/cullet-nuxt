@@ -1,5 +1,5 @@
 import qs from 'qs'
-import {baseState, baseActions, baseMutations} from './base'
+import {baseActions, baseMutations} from './base'
 
 export const state = () => ({
   endpoint: '/items'

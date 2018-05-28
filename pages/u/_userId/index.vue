@@ -68,7 +68,6 @@
 </template>
 
 <script>
-  import UserModel from '@/models/User'
   import ThemeCard from '@/components/theme/ThemeCard'
   import ThemeCreateModal from '@/components/theme/ThemeCreateModal'
   import ThemeEditModal from '@/components/theme/ThemeEditModal'
@@ -77,7 +76,7 @@
   import Favorites from '@/components/views/u/Favorites'
 
   export default {
-    components: { ThemeCard, ThemeCreateModal, ThemeEditModal, Items, Themes, Favorites },
+    components: {ThemeCard, ThemeCreateModal, ThemeEditModal, Items, Themes, Favorites},
     data() {
       return {
         activeTab: '',
@@ -106,7 +105,7 @@
       }
 
       if (this.isSelf) {
-        Object.assign(this.target, new UserModel().deserialize(this.user))
+        Object.assign(this.target, this.user)
       }
       this.refresh()
     },
@@ -117,7 +116,11 @@
     },
     methods: {
       refresh() {
-        new UserModel().findOneWithReport(this.urlUserId).then(res => {
+        this.$store.dispatch('modules/user/findOneWithReport', {
+          id: this.urlUserId,
+          query: {p: 1, s: 10}
+        }).then(res => {
+        // new UserModel().findOneWithReport(this.urlUserId).then(res => {
           this.target = res.data
           if (this.isSelf) {
             this.$store.commit('SET_USER', res.data)

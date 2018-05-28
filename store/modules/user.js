@@ -1,6 +1,5 @@
 import qs from 'qs'
-import Base from '../../models/Base'
-import {baseState, baseActions, baseMutations} from './base'
+import {baseActions, baseMutations} from './base'
 
 export const state = () => ({
   endpoint: '/users'
@@ -34,27 +33,27 @@ export const actions = {
     })
   },
 
-  findThemes({state}, params = {userId: '', query: {}}) {
+  findThemes({state}, params = {id: '', query: {}}) {
     return this.$axios({
-      url: `${state.endpoint}/${params.userId}/themes?${qs.stringify(params.query, {indices: false})}`,
+      url: `${state.endpoint}/${params.id}/themes?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET',
       mode: 'cors',
       credentials: 'include'
     })
   },
 
-  findFavoriteThemes({state}, params = {userId: '', query: {}}) {
+  findFavoriteThemes({state}, params = {id: '', query: {}}) {
     return this.$axios({
-      url: `${state.endpoint}/${params.userId}/themes/_favorite?${qs.stringify(params.query, {indices: false})}`,
+      url: `${state.endpoint}/${params.id}/themes/_favorite?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET',
       mode: 'cors',
       credentials: 'include'
     })
   },
 
-  findItems({state}, params = {userId: '', query: {}}) {
+  findItems({state}, params = {id: '', query: {}}) {
     return this.$axios({
-      url: `${state.endpoint}/${userId}/items?${qs.stringify(params, {indices: false})}`,
+      url: `${state.endpoint}/${params.id}/items?${qs.stringify(params, {indices: false})}`,
       method: 'GET',
       mode: 'cors',
       credentials: 'include'
