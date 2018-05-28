@@ -2,14 +2,8 @@ import qs from 'qs'
 import {baseActions, baseMutations} from './base'
 
 export const state = () => ({
-  endpoint: '/users'
+  endpoint: `${process.env.API_ENDPOINT}/users`
 })
-
-export const mutations = {
-  init(state) {
-    baseMutations.init(state, `/users`)
-  }
-}
 
 export const actions = {
   ...baseActions,

@@ -2,14 +2,8 @@ import qs from 'qs'
 import {baseState, baseActions, baseMutations} from './base'
 
 export const state = () => ({
-  endpoint: '/themes'
+  endpoint: `${process.env.API_ENDPOINT}/themes`
 })
-
-export const mutations = {
-  init(state) {
-    baseMutations.init(state, `/themes`)
-  }
-}
 
 export const actions = {
   ...baseActions,
@@ -52,7 +46,7 @@ export const actions = {
 
   deleteFavorite({state}, params = {themeId: '', userId: ''}) {
     return state.$axios({
-      url: `${this.endpoint}/${params.themeId}/favorites/${params.userId}`,
+      url: `${state.endpoint}/${params.themeId}/favorites/${params.userId}`,
       method: 'DELETE',
       mode: 'cors',
       credentials: 'include'
