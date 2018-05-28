@@ -94,7 +94,6 @@
 <script>
   import ThemeModel from '@/models/Theme'
   import TemplateModel from '@/models/Template'
-  import ItemModel from '@/models/Item'
   import Modal from '@/components/Modal'
   import ThemeSelectModal from '@/components/theme/ThemeSelectModal'
   import ItemDeleteModal from '@/components/item/ItemDeleteModal'
@@ -209,7 +208,8 @@
           this.theme = res.data
         })
 
-        await new ItemModel(this.themeId).findOne(this.itemId).then(res => {
+        this.$store.commit('modules/item/init', {themeId: this.themeId})
+        await this.$store.dispatch('modules/item/findOne', {id: this.itemId}).then(res => {
           this.item = res.data
           this.$el.open()
         }).catch(err => {
@@ -238,7 +238,8 @@
           const body = Object.assign({
             isTemplate: this.isTemplate
           }, this.item)
-          await new ItemModel(this.theme.id).update(this.item.id, body).catch(err => {
+          this.$store.commit('modules/item/init', {themeId: this.theme.id})
+          await this.$store.dispatch('modules/item/update', {id: this.item.id, data: body}).catch(err => {
             this.errorMessage = err
           })
 

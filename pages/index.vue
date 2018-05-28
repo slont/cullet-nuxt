@@ -110,8 +110,6 @@
       }
     },
     asyncData({store}) {
-      // console.log(store)
-      // return new ItemModel().findByNew({
       return store.dispatch('modules/item/findByNew', {
         query: {p: 1, s: SIZE}
       }).then(res => {

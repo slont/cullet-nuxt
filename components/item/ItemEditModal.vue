@@ -168,7 +168,6 @@
 
           this.$store.commit('modules/item/init', {themeId: this.themeId})
           await this.$store.dispatch('modules/item/update', {id: this.item.id, data: body}).catch(err => {
-          // await new ItemModel(this.themeId).update(this.item.id, body).catch(err => {
             this.errorMessage = err
           })
 
