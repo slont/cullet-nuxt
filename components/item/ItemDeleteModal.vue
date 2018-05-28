@@ -26,7 +26,6 @@
 </template>
 
 <script>
-  import ItemModel from '@/models/Item'
   import Modal from '@/components/Modal'
 
   export default {
@@ -54,7 +53,8 @@
         this.$refs.itemDeleteModal.close()
       },
       async ok() {
-        await new ItemModel(this.theme.id).delete(this.item.id).catch(err => {
+        this.$store.commit('modules/item/init', {themeId: this.theme.id})
+        await this.$store.dispatch('modules/item/delete', {id: this.item.id}).catch(err => {
           this.errorMessage = err
           throw new Error(err)
         })

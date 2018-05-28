@@ -78,7 +78,6 @@
 </template>
 
 <script>
-  import ItemModel from '@/models/Item'
   import Modal from '@/components/Modal'
   import ClButtons from '@/components/element/button/ClButtons'
   import TextElement from '@/components/element/TextElement'
@@ -141,7 +140,8 @@
       open(theme, item) {
         this.theme = theme
         this.item = item
-        new ItemModel(theme.id).findOne(this.item.id).then(res => {
+        this.$store.commit('modules/item/init', {themeId: theme.id})
+        this.$store.dispatch('modules/item/findOne', {id: this.item.id}).then(res => {
           this.item = res.data
           this.$refs.itemEditModal.open()
         }).catch(err => {
@@ -165,7 +165,10 @@
           const body = Object.assign({
             isTemplate: this.isTemplate
           }, this.item)
-          await new ItemModel(this.themeId).update(this.item.id, body).catch(err => {
+
+          this.$store.commit('modules/item/init', {themeId: this.themeId})
+          await this.$store.dispatch('modules/item/update', {id: this.item.id, data: body}).catch(err => {
+          // await new ItemModel(this.themeId).update(this.item.id, body).catch(err => {
             this.errorMessage = err
           })
 

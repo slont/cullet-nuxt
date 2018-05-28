@@ -161,7 +161,6 @@
         this.fetchNewItems()
       },
       fetchNewItems() {
-        // new ItemModel().findByNew({
         this.$store.dispatch('modules/item/findByNew', {
           query: {p: Math.floor(this.newItems.length / SIZE) + 1, s: SIZE}
         }).then(res => {

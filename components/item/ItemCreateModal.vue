@@ -90,7 +90,6 @@
 
 <script>
   import TemplateModel from '@/models/Template'
-  import ItemModel from '@/models/Item'
   import Modal from '@/components/Modal'
   import ThemeSelectModal from '@/components/theme/ThemeSelectModal'
   import ClButtons from '@/components/element/button/ClButtons'
@@ -183,7 +182,8 @@
           const body = Object.assign({
             isTemplate: this.isTemplate
           }, this.item)
-          await new ItemModel(this.themeId).create(body).catch(err => {
+          this.$store.commit('modules/item/init', {themeId: this.themeId})
+          await this.$store.dispatch('modules/item/create', {data: body}).catch(err => {
             this.errorMessage = err
           })
 
