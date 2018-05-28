@@ -54,7 +54,6 @@
 
 <script>
   import ThemeModel from '@/models/Theme'
-  import ItemModel from '@/models/Item'
   import ElementView from '@/components/element/ElementView'
   import ThemeCard from '@/components/theme/ThemeCard'
   import ItemCard from '@/components/item/ItemCard'
@@ -140,7 +139,8 @@
         })
       },
       async refreshItem(itemId) {
-        await new ItemModel(this.theme.id).findOne(itemId).then(res => {
+        this.$store.commit('modules/item/init', {themeId: this.theme.id})
+        await this.$store.dispatch('modules/item/findOne', {id: itemId}).then(res => {
           this.currentItem = res.data
           this.$nextTick(() => {
             window.scrollTo(0, 0)

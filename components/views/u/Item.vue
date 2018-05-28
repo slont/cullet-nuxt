@@ -93,7 +93,6 @@
 
 <script>
   import ThemeModel from '@/models/Theme'
-  import ItemModel from '@/models/Item'
   import ItemEditModal from '@/components/item/ItemEditModal'
   import ElementView from '@/components/element/ElementView'
 
@@ -164,7 +163,8 @@
     },
     methods: {
       async init() {
-        new ItemModel(this.themeId).findOne(this.itemId).then(res => {
+        this.$store.commit('modules/item/init', {themeId: this.themeId})
+        this.$store.dispatch('modules/item/findOne', {id: this.itemId}).then(res => {
           Object.assign(this.currentItem, res.data)
           if (res.data.next.id) {
             this.items.push(res.data.next)
@@ -193,7 +193,8 @@
       },
       async refresh(item, transition = 'slide-fade') {
         this.transition = transition
-        await new ItemModel(this.themeId).findOne(item.id).then(res => {
+        this.$store.commit('modules/item/init', {themeId: this.themeId})
+        await this.$store.dispatch('modules/item/findOne', {id: item.id}).then(res => {
           Object.assign(this.currentItem, res.data)
           const first = this.items[0]
           if (first.id === res.data.id) {

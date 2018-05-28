@@ -39,7 +39,6 @@
 
 <script>
   import UserModel from '@/models/User'
-  import ItemModel from '@/models/Item'
   import itemCard from '@/components/item/ItemCard'
   import ElementView from '@/components/element/ElementView'
   const SIZE = 12
@@ -87,7 +86,7 @@
     },
     created() {
       if (this.urlUserId === this.user.id) {
-        Object.assign(this.items, new ItemModel().deserialize(this.$store.state.items).slice(0, SIZE))
+        Object.assign(this.items, this.$store.state.items.slice(0, SIZE))
       }
       this.refresh()
     },
