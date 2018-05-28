@@ -82,7 +82,6 @@
 </template>
 
 <script>
-  import ThemeModel from '@/models/Theme'
   import FileModel from '@/models/File'
   import Modal from '@/components/Modal'
 
@@ -124,9 +123,11 @@
         await this.$validator.validateAll().then(async result => {
           if (!result) return
 
-          await new ThemeModel().create(Object.assign({}, this.theme, {
-            private: this.publication ? 0 : 2
-          })).catch(err => {
+          await this.$store.dispatch('modules/theme/create', {
+            data: Object.assign({}, this.theme, {
+              private: this.publication ? 0 : 2
+            })
+          }).catch(err => {
             this.errorMessage = err
           })
 

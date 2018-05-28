@@ -85,7 +85,6 @@
 </template>
 
 <script>
-  import ThemeModel from '@/models/Theme'
   import FileModel from '@/models/File'
   import Modal from '@/components/Modal'
   import ThemeDeleteModal from './ThemeDeleteModal'
@@ -140,7 +139,7 @@
             tags: this.tags,
             private: this.publication ? 0 : 2
           }
-          await new ThemeModel().update(this.theme.id, body).catch(err => {
+          await this.$store.dispatch('modules/theme/update', {id: this.theme.id, data: body}).catch(err => {
             this.errorMessage = err
             throw new Error(err)
           })

@@ -69,8 +69,6 @@
 </template>
 
 <script>
-  import ThemeModel from '@/models/Theme'
-
   export default {
     props: {
       theme: Object,
@@ -101,9 +99,9 @@
       },
       doFavorite() {
         if (this.theme.favorite) {
-          return new ThemeModel().deleteFavorite(this.theme.id, this.user.id)
+          return this.$store.dispatch('modules/theme/deleteFavorite', {id: this.theme.id, userId: this.user.id})
         } else {
-          return new ThemeModel().updateFavorite(this.theme.id, this.user.id)
+          return this.$store.dispatch('modules/theme/updateFavorite', {id: this.theme.id, userId: this.user.id})
         }
       }
     }

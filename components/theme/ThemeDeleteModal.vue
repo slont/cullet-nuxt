@@ -26,7 +26,6 @@
 </template>
 
 <script>
-  import ThemeModel from '@/models/Theme'
   import Modal from '@/components/Modal'
 
   export default {
@@ -50,7 +49,7 @@
         this.$refs.themeDeleteModal.close()
       },
       async ok() {
-        await new ThemeModel().delete(this.theme.id).catch(err => {
+        await this.$store.dispatch('modules/theme/delete', {id: this.theme.id}).catch(err => {
           this.errorMessage = err
           throw new Error(err)
         })

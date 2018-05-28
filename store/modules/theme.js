@@ -22,23 +22,23 @@ export const actions = {
     })
   },
 
-  findOneFavorite({state}, params = {themeId: '', userId: ''}) {
+  findOneFavorite({state}, params = {id: '', userId: ''}) {
     return this.$axios({
-      url:`${state.endpoint}/${params.themeId}/favorites/${params.userId}`,
+      url:`${state.endpoint}/${params.id}/favorites/${params.userId}`,
       method: 'GET'
     })
   },
 
-  updateFavorite({state}, params = {themeId: '', userId: ''}) {
+  updateFavorite({state}, params = {id: '', userId: ''}) {
     return this.$axios({
-      url: `${state.endpoint}/${params.themeId}/favorites/${params.userId}`,
+      url: `${state.endpoint}/${params.id}/favorites/${params.userId}`,
       method: 'PUT'
     })
   },
 
-  deleteFavorite({state}, params = {themeId: '', userId: ''}) {
+  deleteFavorite({state}, params = {id: '', userId: ''}) {
     return state.$axios({
-      url: `${state.endpoint}/${params.themeId}/favorites/${params.userId}`,
+      url: `${state.endpoint}/${params.id}/favorites/${params.userId}`,
       method: 'DELETE'
     })
   }
