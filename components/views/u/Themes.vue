@@ -13,7 +13,6 @@
 
 <script>
   import UserModel from '@/models/User'
-  import ThemeModel from '@/models/Theme'
   import FavoriteModel from '@/models/Favorite'
   import ThemeCard from '@/components/theme/ThemeCard'
   const SIZE = 10
@@ -51,7 +50,7 @@
     },
     created() {
       if (this.urlUserId === this.user.id) {
-        Object.assign(this.themes, new ThemeModel().deserialize(this.$store.state.themes).slice(0, SIZE))
+        Object.assign(this.themes, this.$store.state.themes.slice(0, SIZE))
       }
       this.refresh()
     },

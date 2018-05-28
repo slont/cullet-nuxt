@@ -92,7 +92,6 @@
 </template>
 
 <script>
-  import ThemeModel from '@/models/Theme'
   import ItemEditModal from '@/components/item/ItemEditModal'
   import ElementView from '@/components/element/ElementView'
 
@@ -187,7 +186,7 @@
             type: 'error'
           })
         })
-        new ThemeModel().findOne(this.themeId).then(res => {
+        this.$store.dispatch('modules/theme/findOne', {id: this.themeId}).then(res => {
           Object.assign(this.theme, res.data)
         })
       },

@@ -53,7 +53,6 @@
 </template>
 
 <script>
-  import ThemeModel from '@/models/Theme'
   import ElementView from '@/components/element/ElementView'
   import ThemeCard from '@/components/theme/ThemeCard'
   import ItemCard from '@/components/item/ItemCard'
@@ -121,8 +120,7 @@
     methods: {
       refresh() {
         const itemId = this.itemId
-        const themeModel = new ThemeModel()
-        themeModel.findOne(this.themeId).then(async res1 => {
+        this.$store.dispatch('modules/theme/findOne', {id: this.themeId}).then(async res1 => {
           Object.assign(this.theme, res1.data)
 
           if (itemId) {
@@ -131,7 +129,9 @@
             this.currentItem = this.theme.items[0]
           }
           if (this.loggedIn) {
-            const res2 = await themeModel.findOneFavorite(this.theme.id, this.user.id).catch(() => ({}))
+            const res2 = await this.$store.dispatch('modules/theme/findOneFavorite', {
+              id: this.theme.id, userId: this.user.id
+            }).catch(() => ({}))
             this.theme.favorite = res2.data && !!res2.data.themeId
           }
         }).catch(() => {
@@ -163,9 +163,9 @@
       },
       doFavorite() {
         if (this.theme.favorite) {
-          return new ThemeModel().deleteFavorite(this.theme.id, this.user.id)
+          return this.$store.dispatch('modules/theme/deleteFavorite', {id: this.theme.id, userId: this.user.id})
         } else {
-          return new ThemeModel().updateFavorite(this.theme.id, this.user.id)
+          return this.$store.dispatch('modules/theme/updateFavorite', {id: this.theme.id, userId: this.user.id})
         }
       },
       infiniteScroll(event) {
