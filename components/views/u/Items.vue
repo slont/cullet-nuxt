@@ -51,17 +51,6 @@
         itemsTotal: 10000
       }
     },
-    asyncData({params}) {
-      return this.$store.dispatch('modules/user/findItems', {
-        id: this.urlUserId,
-        query: {p: 1, s: SIZE}
-      }).then(res => {
-        return {
-          items: res.data,
-          itemsTotal: res.headers['x-page-total']
-        }
-      })
-    },
     computed: {
       urlUserId() {
         return this.$route.params.userId
@@ -84,16 +73,18 @@
       '$route.params.userId': 'refresh'
     },
     created() {
-      if (this.urlUserId === this.user.id) {
-        Object.assign(this.items, this.$store.state.items.slice(0, SIZE))
+      if (process.browser) {
+        if (this.urlUserId === this.user.id) {
+          Object.assign(this.items, this.$store.state.items.slice(0, SIZE))
+        }
+        this.refresh()
       }
-      this.refresh()
     },
     methods: {
       async refresh() {
         await this.fetch(1)
         if (this.loggedIn && this.urlUserId === this.user.id) {
-          this.$store.commit('SET_ITEMS', this.items)
+          this.$store.commit('SET_ITEMS', JSON.parse(JSON.stringify(this.items)))
         }
       },
       async fetch(page) {

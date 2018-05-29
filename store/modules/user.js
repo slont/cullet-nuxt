@@ -39,7 +39,7 @@ export const actions = {
 
   async findItems({state}, params = {id: '', query: {}}) {
     return this.$axios({
-      url: `${state.endpoint}/${params.id}/items?${qs.stringify(params, {indices: false})}`,
+      url: `${state.endpoint}/${params.id}/items?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET'
     })
   }
