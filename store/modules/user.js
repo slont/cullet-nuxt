@@ -12,7 +12,7 @@ export const actions = {
     return this.$axios({
       url: `${state.endpoint}/${params.id}/_password`,
       method: 'PUT',
-      data
+      data: params.data
     })
   },
 

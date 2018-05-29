@@ -19,7 +19,7 @@ export const baseActions = {
     return this.$axios({
       url: `${state.endpoint}`,
       method: 'POST',
-      data
+      data: params.data
     })
   },
 
@@ -27,7 +27,7 @@ export const baseActions = {
     return this.$axios({
       url: `${state.endpoint}/${params.id}`,
       method: 'PUT',
-      data
+      data: params.data
     })
   },
 
