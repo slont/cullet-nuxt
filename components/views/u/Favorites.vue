@@ -11,7 +11,6 @@
 
 <script>
   import UserModel from '@/models/User'
-  import FavoriteModel from '@/models/Favorite'
   import ThemeCard from '@/components/theme/ThemeCard'
   const SIZE = 10
 
@@ -39,9 +38,11 @@
       async refresh() {
         await this.fetch(1)
         if (this.loggedIn) {
-          new FavoriteModel().find({
-            themeIds: this.themes.map(theme => theme.id),
-            userId: this.user.id
+          this.$store.dispatch('modules/favorite/find', {
+            query: {
+              themeIds: this.themes.map(theme => theme.id),
+              userId: this.user.id
+            }
           }).then(res => {
             this.themes.forEach((theme, i) => Object.assign(theme, {
               favorite: !!res.data[i].themeId

@@ -13,7 +13,6 @@
 
 <script>
   import UserModel from '@/models/User'
-  import FavoriteModel from '@/models/Favorite'
   import ThemeCard from '@/components/theme/ThemeCard'
   const SIZE = 10
 
@@ -60,10 +59,12 @@
         if (this.loggedIn && this.urlUserId === this.user.id) {
           this.$store.commit('SET_THEMES', this.themes)
         }
-        // if (this.loggedIn) {
-          new FavoriteModel().find({
-            themeIds: this.themes.map(theme => theme.id),
-            userId: 'slont'
+        if (this.loggedIn) {
+          this.$store.dispatch('modules/favorite/find', {
+            query: {
+              themeIds: this.themes.map(theme => theme.id),
+              userId: 'slont'
+            }
           }).then(res => {
             this.themes.forEach((theme, i) => Object.assign(theme, {
               favorite: !!res.data[i].themeId
@@ -71,7 +72,7 @@
           }).catch(err => {
             if (401 === err.status) this.$store.dispatch('signout')
           })
-        // }
+        }
       },
       async fetch(page) {
         if (this.themes.length < this.themesTotal) {
