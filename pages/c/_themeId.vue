@@ -93,7 +93,6 @@
 </template>
 
 <script>
-  import TemplateModel from '@/models/Template'
   import Modal from '@/components/Modal'
   import ThemeSelectModal from '@/components/theme/ThemeSelectModal'
   import ExitConfirmModal from '@/components/ExitConfirmModal'
@@ -204,10 +203,8 @@
         }
 
         const themeId = theme.id || this.themeId
-        new TemplateModel(themeId).find({
-          p: 1,
-          s: 20
-        }).then(res => {
+        this.$store.commit('modules/template/init', {themeId})
+        this.$store.dispatch('modules/template/find', {query: {p: 1, s: 10}}).then(res => {
           if (res.data.length) {
             this.templates = res.data
             this.item.elements = this.templates[0].elements
@@ -299,7 +296,8 @@
       cacheTheme() {
         this.$store.commit('SET_THEME', this.theme)
         if (this.isTemplate) {
-          new TemplateModel(this.theme.id).find({ p: 1, s: 1 }).then(res => {
+          this.$store.commit('modules/template/init', {themeId: this.theme.id})
+          this.$store.dispatch('modules/template/find', {query: {p: 1, s: 1}}).then(res => {
             this.$store.commit('SET_TEMPLATES', res.data)
           }).catch(err => console.log(err))
         }

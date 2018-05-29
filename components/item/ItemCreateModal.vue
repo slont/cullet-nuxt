@@ -89,7 +89,6 @@
 </template>
 
 <script>
-  import TemplateModel from '@/models/Template'
   import Modal from '@/components/Modal'
   import ThemeSelectModal from '@/components/theme/ThemeSelectModal'
   import ClButtons from '@/components/element/button/ClButtons'
@@ -156,11 +155,8 @@
       },
       refresh(theme) {
         this.theme = theme
-
-        new TemplateModel(this.themeId).find({
-          p: 1,
-          s: 20
-        }).then(res => {
+        this.$store.commit('modules/template/init', {themeId: this.themeId})
+        this.$store.dispatch('modules/template/find', {query: {p: 1, s: 10}}).then(res => {
           if (res.data.length) {
             this.templates = res.data
             this.item.elements = this.templates[0].elements

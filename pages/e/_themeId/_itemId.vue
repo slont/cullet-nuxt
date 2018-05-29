@@ -92,7 +92,6 @@
 </template>
 
 <script>
-  import TemplateModel from '@/models/Template'
   import Modal from '@/components/Modal'
   import ThemeSelectModal from '@/components/theme/ThemeSelectModal'
   import ItemDeleteModal from '@/components/item/ItemDeleteModal'
@@ -311,7 +310,8 @@
       cacheTheme() {
         this.$store.commit('SET_THEME', this.theme)
         if (this.isTemplate) {
-          new TemplateModel(this.theme.id).find({ p: 1, s: 1 }).then(res => {
+          this.$store.commit('modules/template/init', {themeId: this.theme.id})
+          this.$store.dispatch('modules/template/find', {query: {p: 1, s: 1}}).then(res => {
             this.$store.commit('SET_TEMPLATES', res.data)
           }).catch(err => console.log(err))
         }
