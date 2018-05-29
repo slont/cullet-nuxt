@@ -39,7 +39,6 @@
 </template>
 
 <script>
-  import UserModel from '@/models/User'
   import Modal from '@/components/Modal'
   import ThemeCreateModal from '@/components/theme/ThemeCreateModal'
 
@@ -68,9 +67,9 @@
         this.$refs.themeSelectModal.close()
       },
       refresh() {
-        return new UserModel().findThemes(this.user.id, {
-          p: 1,
-          s: 20
+        return this.$store.dispatch('modules/user/findThemes', {
+          id: this.user.id,
+          query: {p: 1, s: 20}
         }).then(res => {
           this.themes = res.data
         })

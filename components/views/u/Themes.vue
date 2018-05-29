@@ -12,7 +12,6 @@
 </template>
 
 <script>
-  import UserModel from '@/models/User'
   import ThemeCard from '@/components/theme/ThemeCard'
   const SIZE = 10
 
@@ -26,9 +25,9 @@
       }
     },
     asyncData({params}) {
-      return new UserModel().findThemes(this.urlUserId, {
-        p: 1,
-        s: SIZE
+      return this.$store.dispatch('modules/user/findThemes', {
+        id: this.urlUserId,
+        query: {p: 1, s: SIZE}
       }).then(res => {
         return {
           themes: res.data.map(theme => {
@@ -76,9 +75,12 @@
       },
       async fetch(page) {
         if (this.themes.length < this.themesTotal) {
-          const res = await new UserModel().findThemes(this.urlUserId, {
-            p: null != page ? page : Math.floor(this.themes.length / SIZE) + 1,
-            s: SIZE
+          const res = await this.$store.dispatch('modules/user/findThemes', {
+            id: this.urlUserId,
+            query: {
+              p: null != page ? page : Math.floor(this.themes.length / SIZE) + 1,
+              s: SIZE
+            }
           }).catch(err => {
             console.log(err)
             this.$message({

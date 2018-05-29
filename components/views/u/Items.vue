@@ -38,7 +38,6 @@
 </template>
 
 <script>
-  import UserModel from '@/models/User'
   import itemCard from '@/components/item/ItemCard'
   import ElementView from '@/components/element/ElementView'
   const SIZE = 12
@@ -53,9 +52,9 @@
       }
     },
     asyncData({params}) {
-      return new UserModel().findItems(this.urlUserId, {
-        p: 1,
-        s: SIZE
+      return this.$store.dispatch('modules/user/findItems', {
+        id: this.urlUserId,
+        query: {p: 1, s: SIZE}
       }).then(res => {
         return {
           items: res.data,
@@ -99,9 +98,12 @@
       },
       async fetch(page) {
         if (this.items.length < this.itemsTotal) {
-          const res = await new UserModel().findItems(this.urlUserId, {
-            p: null != page ? page : Math.floor(this.items.length / SIZE) + 1,
-            s: SIZE
+          const res = await this.$store.dispatch('modules/user/findItems', {
+            id: this.urlUserId,
+            query: {
+              p: null != page ? page : Math.floor(this.items.length / SIZE) + 1,
+              s: SIZE
+            }
           }).catch(err => {
             console.log(err)
             this.$message({

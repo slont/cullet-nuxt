@@ -11,13 +11,15 @@
 <script>
   import HeaderNav from '@/components/HeaderNav'
   import FooterNav from '@/components/FooterNav'
-  import UserModel from '@/models/User'
 
   export default {
     components: {HeaderNav, FooterNav},
     fetch({ store, params }) {
       if (store.state.user.id && !store.state.theme.id) {
-        return new UserModel().findThemes(store.state.user.id, {p: 1, s: 1}).then(res => {
+        return this.$store.dispatch('modules/user/findThemes', {
+          id: store.state.user.id,
+          query: {p: 1, s: 1}
+        }).then(res => {
           if (res.data.length) {
             store.commit('SET_THEME', res.data[0])
           }
@@ -26,7 +28,10 @@
     },
     created() {
       if (this.user.id && !this.$store.state.theme.id) {
-        return new UserModel().findThemes(this.user.id, {p: 1, s: 1}).then(res => {
+        return this.$store.dispatch('modules/user/findThemes', {
+          id: this.user.id,
+          query: {p: 1, s: 1}
+        }).then(res => {
           if (res.data.length) {
             this.$store.commit('SET_THEME', res.data[0])
           }

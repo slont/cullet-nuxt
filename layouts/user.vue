@@ -69,7 +69,6 @@
 <script>
   import HeaderNav from '@/components/HeaderNav'
   import FooterNav from '@/components/FooterNav'
-  import UserModel from '@/models/User'
   import ThemeCard from '@/components/theme/ThemeCard'
   import ThemeCreateModal from '@/components/theme/ThemeCreateModal'
   import ThemeEditModal from '@/components/theme/ThemeEditModal'
@@ -91,7 +90,10 @@
     },
     fetch({ store, params }) {
       if (store.state.user.id && !store.state.theme.id) {
-        return new UserModel().findThemes(this.user.id, {p: 1, s: 1}).then(res => {
+        return this.$store.dispatch('modules/user/findThemes', {
+          id: this.user.id,
+          query: {p: 1, s: 1}
+        }).then(res => {
           if (res.data.length) {
             store.commit('SET_THEME', res.data[0])
           }
@@ -111,13 +113,13 @@
     },
     created() {
       if (this.isSelf) {
-        Object.assign(this.target, new UserModel().deserialize(this.user))
+        Object.assign(this.target, this.user)
       }
       this.refresh()
     },
     methods: {
       refresh() {
-        new UserModel().findOneWithReport(this.urlUserId).then(res => {
+        return this.$store.dispatch('modules/user/findOneWithReport', {id: this.urlUserId}).then(res => {
           this.target = res.data
           if (this.isSelf) {
             this.$store.commit('SET_USER', res.data)

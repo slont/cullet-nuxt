@@ -69,8 +69,6 @@
 </template>
 
 <script>
-  import UserModel from '@/models/User'
-
   export default {
     data() {
       return {
@@ -102,12 +100,15 @@
         this.$validator.validateAll().then(result => {
           if (!result) return
 
-          new UserModel().update(this.id, {
-            id: this.self.id,
-            name: this.self.name,
-            email: this.self.email,
-            biography: this.self.biography,
-            image: this.self.image
+          this.$store.dispatch('modules/user/update', {
+            id: this.id,
+            data: {
+              id: this.self.id,
+              name: this.self.name,
+              email: this.self.email,
+              biography: this.self.biography,
+              image: this.self.image
+            }
           }).then(() => {
             this.$store.commit('SET_USER', this.self)
             this.id = this.self.id

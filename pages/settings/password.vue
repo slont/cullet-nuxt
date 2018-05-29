@@ -27,8 +27,6 @@
 </template>
 
 <script>
-  import UserModel from '@/models/User'
-
   export default {
     data() {
       return {
@@ -43,11 +41,13 @@
       save() {
         this.$validator.validateAll().then(result => {
           if (!result) return
-
-          new UserModel().updatePassword(this.$store.state.user.id, {
-            password: this.password,
-            newPassword: this.newPassword
-          }).then(() => {
+          this.$store.dispatch('modules/user/updatePassword', {
+            id: this.$store.state.user.id,
+            data: {
+              password: this.password,
+              newPassword: this.newPassword
+            }
+          }).then(res => {
             this.$message({
               showClose: true,
               message: '変更されました',

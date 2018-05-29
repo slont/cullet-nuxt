@@ -10,7 +10,6 @@
 </template>
 
 <script>
-  import UserModel from '@/models/User'
   import ThemeCard from '@/components/theme/ThemeCard'
   const SIZE = 10
 
@@ -52,9 +51,12 @@
       },
       async fetch(page) {
         if (this.themes.length < this.themesTotal) {
-          const res = await new UserModel().findFavoriteThemes(this.urlUserId, {
-            p: null != page ? page : Math.floor(this.themes.length / this.size) + 1,
-            s: this.size
+          const res = await this.$store.dispatch('modules/user/findFavoriteThemes', {
+            id: this.urlUserId,
+            query: {
+              p: null != page ? page : Math.floor(this.themes.length / this.size) + 1,
+              s: this.size
+            }
           }).catch(err => {
             console.log(err)
             this.$message({
