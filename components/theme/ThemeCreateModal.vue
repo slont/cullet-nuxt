@@ -82,7 +82,6 @@
 </template>
 
 <script>
-  import FileModel from '@/models/File'
   import Modal from '@/components/Modal'
 
   export default {
@@ -162,7 +161,7 @@
       changeImage(e) {
         this.createDataUrl(e, (dataUrl, fileName) => {
           this.theme.image = dataUrl
-          new FileModel().create(this.dataURLtoBlob(dataUrl), fileName).then(res => {
+          this.$store.dispatch('modules/file/create', {file: this.dataURLtoBlob(dataUrl), fileName}).then(res => {
             this.theme.image = res.data.path
           })
         })

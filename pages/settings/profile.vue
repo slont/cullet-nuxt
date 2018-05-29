@@ -69,7 +69,6 @@
 </template>
 
 <script>
-  import FileModel from '@/models/File'
   import UserModel from '@/models/User'
 
   export default {
@@ -130,7 +129,7 @@
       changeImage(e) {
         this.createDataUrl(e, (dataUrl, fileName) => {
           this.self.image = dataUrl
-          new FileModel().create(this.dataURLtoBlob(dataUrl), fileName).then(res => {
+          this.$store.dispatch('modules/file/create', {file: this.dataURLtoBlob(dataUrl), fileName}).then(res => {
             this.self.image = res.data.path
           })
         })

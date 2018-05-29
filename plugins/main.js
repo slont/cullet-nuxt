@@ -19,6 +19,9 @@ Vue.use({
         },
         isMobile() {
           return process.browser ? 768 >= window.innerWidth : false
+        },
+        dataURLtoBlob() {
+          return process.browser ? require('blueimp-canvas-to-blob') : {}
         }
       },
       async mounted() {
@@ -41,7 +44,6 @@ Vue.use({
             return dt.format(format)
           }
         },
-        // dataURLtoBlob: process.browser ? require('blueimp-canvas-to-blob') : {},
         createDataUrl(e, callback) {
           const MAX_WIDTH = 1080
           const MAX_SIZE = 60000

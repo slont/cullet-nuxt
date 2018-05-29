@@ -34,7 +34,6 @@
 </template>
 
 <script>
-  import FileModel from '@/models/File'
   import ClElement from './ClElement'
 
   export default {
@@ -63,7 +62,7 @@
       changeImage(e) {
         this.createDataUrl(e, (dataUrl, fileName) => {
           this.params.valueStr = dataUrl
-          new FileModel().create(this.dataURLtoBlob(dataUrl), fileName, this.themeId).then(res => {
+          this.$store.dispatch('modules/file/create', {file: this.dataURLtoBlob(dataUrl), fileName, themeId: this.themeId}).then(res => {
             this.params.valueStr = res.data.path
           })
         })
