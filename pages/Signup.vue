@@ -46,8 +46,6 @@
 </template>
 
 <script>
-  import AuthModel from '@/models/Auth'
-
   export default {
     layout: 'blank',
     data() {
@@ -71,9 +69,11 @@
           if (!result) return
 
           this.isLoading = true
-          await new AuthModel().signup({
-            email: this.email,
-            password: this.password
+          this.$store.dispatch('modules/auth/signinTwitter', {
+            data: {
+              email: this.email,
+              password: this.password
+            }
           }).catch(err => {
             this.isLoading = false
             this.errorMessage = err.message

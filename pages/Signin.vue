@@ -80,8 +80,6 @@
 </template>
 
 <script>
-  import AuthModel from '@/models/Auth'
-
   export default {
     layout: 'blank',
     data() {
@@ -104,7 +102,7 @@
             email: this.email,
             password: this.password
           }
-          await new AuthModel().signin(loginInfo).then(res => {
+          await this.$store.dispatch('modules/auth/signin', {data: loginInfo}).then(res => {
             this.$store.dispatch('signin', res.data)
           }).catch(err => {
             this.errorMessage = err.message
@@ -123,13 +121,13 @@
         })
       },
       signinTwitter() {
-        new AuthModel().signinTwitter({}).then(res => {
+        this.$store.dispatch('modules/auth/signinTwitter').then(res => {
           this.$store.dispatch('signin', res.data)
           this.$router.push('/')
         })
       },
       logout() {
-        new AuthModel().logout({}).then(res => {
+        this.$store.dispatch('modules/auth/logout').then(res => {
           console.log(res)
         })
       },

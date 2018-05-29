@@ -19,11 +19,10 @@ export const actions = {
     })
   },
 
-  signinTwitter({state}, params = {data: {}}) {
+  signinTwitter({state}) {
     return this.$axios({
       url: `/signin/twitter`,
       method: 'POST',
-      data: params.data,
       redirect: 'manual'
     })
   },
