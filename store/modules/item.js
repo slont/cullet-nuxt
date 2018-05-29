@@ -14,7 +14,7 @@ export const mutations = {
 export const actions = {
   ...baseActions,
 
-  findByNew({state}, params = {query: {}}) {
+  async findByNew({state}, params = {query: {}}) {
     return this.$axios({
       url: `/items/_new?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET'

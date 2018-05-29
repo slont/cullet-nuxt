@@ -8,35 +8,35 @@ export const state = () => ({
 export const actions = {
   ...baseActions,
 
-  findByTagName({state}, params = {query: {}}) {
+  async findByTagName({state}, params = {query: {}}) {
     return this.$axios({
       url: `${state.endpoint}/_tag?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET'
     })
   },
 
-  findByNew({state}, params = {query: {}}) {
+  async findByNew({state}, params = {query: {}}) {
     return this.$axios({
       url: `${state.endpoint}/_new?${qs.stringify(params.query, {indices: false})}`,
       method: 'GET'
     })
   },
 
-  findOneFavorite({state}, params = {id: '', userId: ''}) {
+  async findOneFavorite({state}, params = {id: '', userId: ''}) {
     return this.$axios({
       url:`${state.endpoint}/${params.id}/favorites/${params.userId}`,
       method: 'GET'
     })
   },
 
-  updateFavorite({state}, params = {id: '', userId: ''}) {
+  async updateFavorite({state}, params = {id: '', userId: ''}) {
     return this.$axios({
       url: `${state.endpoint}/${params.id}/favorites/${params.userId}`,
       method: 'PUT'
     })
   },
 
-  deleteFavorite({state}, params = {id: '', userId: ''}) {
+  async deleteFavorite({state}, params = {id: '', userId: ''}) {
     return state.$axios({
       url: `${state.endpoint}/${params.id}/favorites/${params.userId}`,
       method: 'DELETE'

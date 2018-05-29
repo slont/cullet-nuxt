@@ -11,7 +11,9 @@ export default function ({app}) {
     if (process.client) {
       config.headers['X-Requested-With'] = location.href
     }
-    config.headers['Content-Type'] = 'application/json'
+    if (!config.headers['Content-Type']) {
+      config.headers['Content-Type'] = 'application/json'
+    }
     return config
   })
 
